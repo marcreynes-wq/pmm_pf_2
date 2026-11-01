@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../models/persona.dart';
 
+// StatelessWidget porque recibe una Persona
+// y solamente muestra sus datos.
 class ProfileCard extends StatelessWidget {
   final Persona persona;
 
@@ -10,6 +12,13 @@ class ProfileCard extends StatelessWidget {
     super.key,
     required this.persona,
   });
+
+  String _formatearFecha(DateTime fecha) {
+    final dia = fecha.day.toString().padLeft(2, '0');
+    final mes = fecha.month.toString().padLeft(2, '0');
+
+    return '$dia/$mes/${fecha.year}';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +61,7 @@ class ProfileCard extends StatelessWidget {
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    '${persona.fechaNacimiento.day.toString().padLeft(2, '0')}/'
-                    '${persona.fechaNacimiento.month.toString().padLeft(2, '0')}/'
-                    '${persona.fechaNacimiento.year}',
+                    _formatearFecha(persona.fechaNacimiento),
                   ),
                 ),
               ],
