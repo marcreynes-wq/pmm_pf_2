@@ -19,11 +19,11 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     persona = Persona(
-      name: 'Tu nombre',
-      surname: 'Tus apellidos',
+      nombre: 'Tu nombre',
+      apellidos: 'Tus apellidos',
       email: 'tuemail@example.com',
       password: '',
-      dateOfBirth: DateTime(2000, 1, 1),
+      fechaNacimiento: DateTime(2000, 1, 1),
     );
   }
 

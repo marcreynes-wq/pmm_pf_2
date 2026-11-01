@@ -1,17 +1,18 @@
+
 class Persona {
-  String name;
-  String surname;
+  String nombre;
+  String apellidos;
   String email;
   String password;
-  DateTime dateOfBirth;
+  DateTime fechaNacimiento;
 
   Persona({
-    required this.name,
-    required this.surname,
+    required this.nombre,
+    required this.apellidos,
     required this.email,
     required this.password,
-    required this.dateOfBirth,
+    required this.fechaNacimiento,
   });
 
-  String get fullName => '$name $surname';
+  String get nombreCompleto => '$nombre $apellidos';
 }
