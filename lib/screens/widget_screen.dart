@@ -20,4 +20,26 @@ class _WidgetScreenState extends State<WidgetScreen> {
     'Estudiar widgets',
   ];
 
+  void _eliminarTarea(int index) {
+    final tareaEliminada = _tareas[index];
+
+    setState(() {
+      _tareas.removeAt(index);
+    });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('$tareaEliminada eliminada'),
+        action: SnackBarAction(
+          label: 'Deshacer',
+          onPressed: () {
+            setState(() {
+              _tareas.insert(index, tareaEliminada);
+            });
+          },
+        ),
+      ),
+    );
+  }
+
 }
