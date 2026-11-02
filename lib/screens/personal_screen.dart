@@ -22,6 +22,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
   late TextEditingController _apellidosController;
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
+  late TextEditingController _fechaController;
 
   late DateTime _fechaNacimiento;
 
@@ -46,6 +47,9 @@ class _PersonalScreenState extends State<PersonalScreen> {
     );
 
     _fechaNacimiento = widget.persona.fechaNacimiento;
+    _fechaController = TextEditingController(
+      text: _formatearFecha(_fechaNacimiento),
+    );
   }
 
   @override
@@ -54,6 +58,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
     _apellidosController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    _fechaController.dispose();
 
     super.dispose();
   }
@@ -69,6 +74,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
     if (fechaSeleccionada != null) {
       setState(() {
         _fechaNacimiento = fechaSeleccionada;
+        _fechaController.text = _formatearFecha(fechaSeleccionada);
       });
     }
   }
@@ -188,9 +194,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
                 suffixIcon: const Icon(Icons.edit_calendar),
                 hintText: _formatearFecha(_fechaNacimiento),
               ),
-              controller: TextEditingController(
-                text: _formatearFecha(_fechaNacimiento),
-              ),
+              initialValue: _formatearFecha(_fechaNacimiento),
               onTap: _seleccionarFecha,
             ),
             const SizedBox(height: 24),

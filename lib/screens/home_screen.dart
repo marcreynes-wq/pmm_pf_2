@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 
 import '../models/persona.dart';
 import '../widgets/profile_card.dart';
+import 'personal_screen.dart';
+import 'widget_screen.dart';
 
+// StatefulWidget porque el perfil cambia cuando
+// volvemos de la pantalla de edición.
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -27,6 +31,35 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Future<void> _editarPerfil() async {
+    final Persona? personaActualizada =
+        await Navigator.push<Persona>(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return PersonalScreen(persona: persona);
+        },
+      ),
+    );
+
+    if (personaActualizada != null && mounted) {
+      setState(() {
+        persona = personaActualizada;
+      });
+    }
+  }
+
+  void _abrirWidgetShowcase() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return const WidgetScreen();
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,11 +70,11 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           ProfileCard(persona: persona),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+            ),
             child: FilledButton.icon(
-              onPressed: () {
-                // Añadiremos la navegación para editar el perfil.
-              },
+              onPressed: _editarPerfil,
               icon: const Icon(Icons.edit),
               label: const Text('Edit Profile'),
             ),
@@ -49,11 +82,11 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(
             padding: const EdgeInsets.all(16),
             child: OutlinedButton.icon(
-              onPressed: () {
-                // Añadiremos la navegación al catálogo de widgets.
-              },
+              onPressed: _abrirWidgetShowcase,
               icon: const Icon(Icons.widgets_outlined),
-              label: const Text('Explore Widget Showcase'),
+              label: const Text(
+                'Explore Widget Showcase',
+              ),
             ),
           ),
         ],
