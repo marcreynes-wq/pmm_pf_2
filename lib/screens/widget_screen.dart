@@ -9,3 +9,15 @@ class WidgetScreen extends StatefulWidget {
   State<WidgetScreen> createState() =>
       _WidgetScreenState();
 }
+
+
+
+class _WidgetScreenState extends State<WidgetScreen> {
+  final List<String> _tareas = [
+    'Aprender Flutter',
+    'Practicar Dart',
+    'Crear aplicaciones móviles',
+    'Estudiar widgets',
+  ];
+
+}
